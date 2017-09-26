@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidExercicioActivitiesIntentsFacul</string>
+    <string name="phone">Telefone:</string>
+    <string name="email">Email:</string>
+    <string name="name">Nome:</string>
+    <string name="save">Salvar</string>
 </resources>
