@@ -14,7 +14,7 @@ import com.example.orafa.androidexercicioactivitiesintentsfacul.model.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
@@ -31,24 +31,19 @@ public class MainActivity extends AppCompatActivity  {
         this.mViewHolder.listStudent = (ListView) findViewById(R.id.listStudent);
         this.mViewHolder.buttonAdd = (Button) findViewById(R.id.buttonAdd);
 
+        this.mViewHolder.buttonAdd.setOnClickListener(this);
+
         mStudent = new ArrayList<>();
 
         mAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, mStudent);
         this.mViewHolder.listStudent.setAdapter(mAdapter);
 
-        findViewById(R.id.buttonAdd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NewStudantActivity.class);
-                startActivityForResult(intent, REQUEST_CADASTRO);
-            }
-        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_OK) {
+        if (resultCode  == RESULT_OK) {
             if(requestCode == REQUEST_CADASTRO){
                 student = (Student) data.getSerializableExtra("student");
                 mStudent.add(student);
@@ -58,15 +53,15 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.buttonAdd:
-//                Intent intent = new Intent(MainActivity.this, NewStudantActivity.class);
-//                startActivityForResult(intent, REQUEST_CADASTRO);
-//                break;
-//        }
-//    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonAdd:
+                Intent intent = new Intent(MainActivity.this, NewStudantActivity.class);
+                startActivityForResult(intent, REQUEST_CADASTRO);
+                break;
+        }
+    }
 
     private static class ViewHolder {
         ListView listStudent;
