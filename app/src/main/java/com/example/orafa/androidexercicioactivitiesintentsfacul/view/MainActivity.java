@@ -14,10 +14,11 @@ import com.example.orafa.androidexercicioactivitiesintentsfacul.model.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
+    Student student;
     List<Student> mStudent;
     ArrayAdapter<Student> mAdapter;
     public static final int REQUEST_CADASTRO = 0;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.mViewHolder.listStudent= (ListView) findViewById(R.id.listStudent);
+        this.mViewHolder.listStudent = (ListView) findViewById(R.id.listStudent);
         this.mViewHolder.buttonAdd = (Button) findViewById(R.id.buttonAdd);
 
         mStudent = new ArrayList<>();
@@ -47,19 +48,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CADASTRO && requestCode == RESULT_OK) {
-            Student student = (Student) data.getParcelableExtra("student");
-            mStudent.add(student);
-            mAdapter.notifyDataSetChanged();
+        if (requestCode == RESULT_OK) {
+            if(requestCode == REQUEST_CADASTRO){
+                student = (Student) data.getSerializableExtra("student");
+                mStudent.add(student);
+                mAdapter.notifyDataSetChanged();
+            }
+
         }
     }
 
-    //    @Override
+//    @Override
 //    public void onClick(View v) {
 //        switch (v.getId()) {
 //            case R.id.buttonAdd:
 //                Intent intent = new Intent(MainActivity.this, NewStudantActivity.class);
-//                startActivity(intent);
+//                startActivityForResult(intent, REQUEST_CADASTRO);
 //                break;
 //        }
 //    }
@@ -67,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private static class ViewHolder {
         ListView listStudent;
         Button buttonAdd;
-
     }
 
 }
