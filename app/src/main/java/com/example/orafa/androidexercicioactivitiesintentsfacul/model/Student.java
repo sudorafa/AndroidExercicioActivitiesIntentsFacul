@@ -1,8 +1,5 @@
 package com.example.orafa.androidexercicioactivitiesintentsfacul.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 /**
@@ -11,16 +8,10 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String phone;
-
-    public Student(String name, String email, String phone) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-    }
 
     public String getName() {
         return name;
@@ -51,11 +42,11 @@ public class Student implements Serializable {
         return name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
