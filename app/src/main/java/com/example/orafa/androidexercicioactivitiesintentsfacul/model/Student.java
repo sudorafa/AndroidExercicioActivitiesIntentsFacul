@@ -9,8 +9,9 @@ import java.io.Serializable;
  * Created by o Rafa on 25/09/2017.
  */
 
-public class Student implements Serializable{
+public class Student implements Serializable {
 
+    private int id;
     private String name;
     private String email;
     private String phone;
@@ -50,4 +51,11 @@ public class Student implements Serializable{
         return name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

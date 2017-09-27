@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.orafa.androidexercicioactivitiesintentsfacul.R;
+import com.example.orafa.androidexercicioactivitiesintentsfacul.dao.DStudent;
 import com.example.orafa.androidexercicioactivitiesintentsfacul.model.Student;
 
 public class NewStudantActivity extends AppCompatActivity implements View.OnClickListener{
@@ -35,12 +36,14 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
         email = mViewHolder.editEmail.getText().toString();
         phone = mViewHolder.editPhone.getText().toString();
         Student student = new Student(name, email, phone);
-        Intent intent = new Intent();
+        //Intent intent = new Intent();
 
         switch (v.getId()) {
             case R.id.buttonSave:
-                intent.putExtra("student", student);
-                setResult(RESULT_OK, intent);
+                //intent.putExtra("student", student);
+                //setResult(RESULT_OK, intent);
+                DStudent dStudent = new DStudent(NewStudantActivity.this);
+                dStudent.save(student);
                 finish();
                 break;
         }

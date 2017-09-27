@@ -40,18 +40,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode  == RESULT_OK) {
-            if(requestCode == REQUEST_CADASTRO){
-                student = (Student) data.getSerializableExtra("student");
-                mStudent.add(student);
-                mAdapter.notifyDataSetChanged();
-            }
-
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode  == RESULT_OK) {
+//            if(requestCode == REQUEST_CADASTRO){
+//                student = (Student) data.getSerializableExtra("student");
+//                mStudent.add(student);
+//                mAdapter.notifyDataSetChanged();
+//            }
+//
+//        }
+//    }
 
     @Override
     public void onClick(View v) {
