@@ -4,4 +4,5 @@
     <string name="email">Email:</string>
     <string name="name">Nome:</string>
     <string name="save">Salvar</string>
+    <string name="delete">DELETAR</string>
 </resources>

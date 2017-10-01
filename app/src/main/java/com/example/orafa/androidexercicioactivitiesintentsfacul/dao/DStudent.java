@@ -91,4 +91,14 @@ public class DStudent extends SQLiteOpenHelper {
         }
         return students;
     }
+
+    public void delete(Student student) {
+        //Montar o Dicionário de Dados = ContentValues
+        ContentValues cv = getContentValues(student);
+        //pegar uma instância de SQLiteDatabe
+        SQLiteDatabase db = getWritableDatabase();
+        //delete
+        String[] params = {student.getId().toString()};
+        db.delete("student", "id = ?", params);
+    }
 }

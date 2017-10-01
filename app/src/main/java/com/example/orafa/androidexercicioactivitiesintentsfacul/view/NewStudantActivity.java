@@ -21,6 +21,7 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_new_studant);
 
         this.mViewHolder.buttonSave = (Button) findViewById(R.id.buttonSave);
+        this.mViewHolder.buttonDelete = (Button) findViewById(R.id.buttonDelete);
         this.mViewHolder.editName = (EditText) findViewById(R.id.editName);
         this.mViewHolder.editEmail = (EditText) findViewById(R.id.editEmail);
         this.mViewHolder.editPhone = (EditText) findViewById(R.id.editPhone);
@@ -36,7 +37,7 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
         }
 
         this.mViewHolder.buttonSave.setOnClickListener(this);
-
+        this.mViewHolder.buttonDelete.setOnClickListener(this);
     }
 
     @Override
@@ -47,8 +48,13 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
                 student.setName(mViewHolder.editName.getText().toString());
                 student.setEmail(mViewHolder.editEmail.getText().toString());
                 student.setPhone(mViewHolder.editPhone.getText().toString());
-                DStudent dStudent = new DStudent(NewStudantActivity.this);
-                dStudent.save(student);
+                DStudent dStudentSave = new DStudent(NewStudantActivity.this);
+                dStudentSave.save(student);
+                finish();
+                break;
+            case R.id.buttonDelete:
+                DStudent dStudentDelete = new DStudent(NewStudantActivity.this);
+                dStudentDelete.delete(student);
                 finish();
                 break;
         }
@@ -59,6 +65,6 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
         EditText editEmail;
         EditText editPhone;
         Button buttonSave;
-
+        Button buttonDelete;
     }
 }
