@@ -4,4 +4,10 @@
     <string name="email">Email:</string>
     <string name="name">Nome:</string>
     <string name="save">Salvar</string>
+    <string name="callToStudent">Ligar para Aluno</string>
+    <string name="smsToStudent">Enviar SMS Para o Aluno</string>
+    <string name="sendEmail">Enviar Email para o Aluno</string>
+    <string name="mapLocation">Ver Localização no Mapa</string>
+    <string name="siteStudent">Acessar o Site do Aluno</string>
+    <string name="site">Site</string>
 </resources>

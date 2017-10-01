@@ -1,8 +1,12 @@
 package com.example.orafa.androidexercicioactivitiesintentsfacul.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewHolder mViewHolder = new ViewHolder();
 
     Student student;
-    List<Student> mStudent;
+    List<Student> mListStudent;
     ArrayAdapter<Student> mAdapter;
     public static final int REQUEST_CADASTRO = 0;
 
@@ -33,20 +37,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.mViewHolder.buttonAdd.setOnClickListener(this);
 
-        mStudent = new ArrayList<>();
+        mListStudent = new ArrayList<>();
 
-        mAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, mStudent);
+        mAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, mListStudent);
         this.mViewHolder.listStudent.setAdapter(mAdapter);
 
+        //Registra a list para usar o método onCreateContextMenu que add o menu
+        registerForContextMenu(this.mViewHolder.listStudent);
+
+    }
+
+    //A partir do parâmetro contextMenu podemos criar opções para o nosso context menu utilizando o método add:
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.callToStudent);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.smsToStudent);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.sendEmail);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.mapLocation);
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.siteStudent);
+    }
+
+    //Para poder dar uma ação para um context menu: Basta sobrescrevemos o método onContextItemSelected
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode  == RESULT_OK) {
-            if(requestCode == REQUEST_CADASTRO){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CADASTRO) {
                 student = (Student) data.getSerializableExtra("student");
-                mStudent.add(student);
+                mListStudent.add(student);
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -61,6 +89,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(intent, REQUEST_CADASTRO);
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        this.mViewHolder.listStudent.setOnCreateContextMenuListener(this);
     }
 
     private static class ViewHolder {

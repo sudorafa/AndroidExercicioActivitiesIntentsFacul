@@ -14,11 +14,13 @@ public class Student implements Serializable{
     private String name;
     private String email;
     private String phone;
+    private String site;
 
-    public Student(String name, String email, String phone) {
+    public Student(String name, String email, String phone, String site) {
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.site = site;
     }
 
     public String getName() {
@@ -33,6 +35,10 @@ public class Student implements Serializable{
         return phone;
     }
 
+    public String getSite() {
+        return site;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -43,6 +49,10 @@ public class Student implements Serializable{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     @Override

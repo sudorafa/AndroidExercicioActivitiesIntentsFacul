@@ -23,6 +23,7 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
         this.mViewHolder.editName = (EditText) findViewById(R.id.editName);
         this.mViewHolder.editEmail = (EditText) findViewById(R.id.editEmail);
         this.mViewHolder.editPhone = (EditText) findViewById(R.id.editPhone);
+        this.mViewHolder.editSite = (EditText) findViewById(R.id.editSite);
 
         this.mViewHolder.buttonSave.setOnClickListener(this);
 
@@ -30,11 +31,12 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        String name, email, phone;
+        String name, email, phone, site;
         name = mViewHolder.editName.getText().toString();
         email = mViewHolder.editEmail.getText().toString();
         phone = mViewHolder.editPhone.getText().toString();
-        Student student = new Student(name, email, phone);
+        site = mViewHolder.editSite.getText().toString();
+        Student student = new Student(name, email, phone, site);
         Intent intent = new Intent();
 
         switch (v.getId()) {
@@ -48,6 +50,7 @@ public class NewStudantActivity extends AppCompatActivity implements View.OnClic
 
     private static class ViewHolder {
         EditText editName;
+        EditText editSite;
         EditText editEmail;
         EditText editPhone;
         Button buttonSave;
