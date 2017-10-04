@@ -68,29 +68,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentCall);
                 break;
             case 2:
-                Intent intentSendSms = new Intent(Intent.ACTION_VIEW);
-                intentSendSms.putExtra("address", student.getPhone());
-                startActivity(intentSendSms);
+                Intent intentSendSms = new Intent(Intent.ACTION_SENDTO);
+                intentSendSms.setData(Uri.parse("smsto:" + student.getPhone()));
+                if (intentSendSms.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intentSendSms);
+                }
                 break;
             case 3:
-                Intent intentSendEmail = new Intent(Intent.ACTION_VIEW);
-                intentSendEmail.putExtra("address", student.getEmail());
-                startActivity(intentSendEmail);
+                Intent intentSendEmail = new Intent(Intent.ACTION_SEND);
+                intentSendEmail.putExtra(Intent.EXTRA_EMAIL, student.getEmail());
+                intentSendEmail.setType("message/rfc822");
+                startActivity(Intent.createChooser(intentSendEmail, "Choose an Email client :"));
                 break;
             case 4:
                 String uriMap = "http://maps.google.com/maps";
                 Intent intentMap = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uriMap));
                 intentMap.setComponent(new ComponentName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity"));
                 startActivity(intentMap);
-                //Por exemplo, para exibir um mapa de São Francisco, você pode usar este código:
-//                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
                 break;
             case 5:
-                Intent intentSite = new Intent(Intent.ACTION_VIEW, Uri.parse(student.getSite()));
-                startActivity(intentSite);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(student.getSite()));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
                 break;
         }
         return super.onContextItemSelected(item);
