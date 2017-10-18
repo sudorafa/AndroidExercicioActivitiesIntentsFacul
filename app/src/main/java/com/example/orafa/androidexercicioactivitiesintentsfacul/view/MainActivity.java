@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.example.orafa.androidexercicioactivitiesintentsfacul.R;
 import com.example.orafa.androidexercicioactivitiesintentsfacul.model.Student;
+import com.example.orafa.androidexercicioactivitiesintentsfacul.model.StudentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ViewHolder mViewHolder = new ViewHolder();
 
-    Student student;
-    List<Student> mStudent;
-    ArrayAdapter<Student> mAdapter;
+    Student mStudent;
+    List<Student> mStudents;
+    StudentAdapter mStudentAdapter;
     public static final int REQUEST_CADASTRO = 0;
 
     @Override
@@ -33,10 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.mViewHolder.buttonAdd.setOnClickListener(this);
 
-        mStudent = new ArrayList<>();
+        mStudents = new ArrayList<>();
 
-        mAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, mStudent);
-        this.mViewHolder.listStudent.setAdapter(mAdapter);
+        //mAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, mStudent);
+        mStudentAdapter = new StudentAdapter(this, mStudents);
+        this.mViewHolder.listStudent.setAdapter(mStudentAdapter);
 
     }
 
@@ -45,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode  == RESULT_OK) {
             if(requestCode == REQUEST_CADASTRO){
-                student = (Student) data.getSerializableExtra("student");
-                mStudent.add(student);
-                mAdapter.notifyDataSetChanged();
+                mStudent = (Student) data.getSerializableExtra("student");
+                mStudents.add(mStudent);
+                mStudentAdapter.notifyDataSetChanged();
             }
 
         }
